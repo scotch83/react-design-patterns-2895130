@@ -6,6 +6,7 @@ app.use(express.json());
 
 let currentUser = {
 	name: 'John Doe',
+	id: '123',
 	age: 54,
 	hairColor: 'brown',
 	hobbies: ['swimming', 'bicycling', 'video games'],
@@ -13,22 +14,26 @@ let currentUser = {
 
 let users = [{
 	name: 'John Doe',
+	id: '234',
 	age: 54,
 	hairColor: 'brown',
 	hobbies: ['swimming', 'bicycling', 'video games'],
 }, {
 	name: 'Brenda Smith',
+	id: '345',
 	age: 33,
 	hairColor: 'black',
 	hobbies: ['golf', 'mathematics'],
 }, {
 	name: 'Jane Garcia',
+	id: '456',
 	age: 27,
 	hairColor: 'blonde',
 	hobbies: ['biology', 'medicine', 'gymnastics'],
 }];
 
 const products = [{
+	id: '1234',
 	name: 'Flat-Screen TV',
 	price: '$300',
 	description: 'Huge LCD screen, a great deal',
@@ -51,8 +56,10 @@ app.get('/current-user', (req, res) => {
 
 app.get('/users/:id', (req, res) => {
 	const { id } = req.params;
-
-	res.json(users.find(user => user.id === id));
+	const user = users.find(user => user.id === id);
+	if (!user)
+		res.sendStatus(404);
+	else res.json(user);
 });
 
 app.post('/users/:id', (req, res) => {
