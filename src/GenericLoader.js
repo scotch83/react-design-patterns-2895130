@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react'
 export const GenericLoader = ({ children, resourceUrl, resourceProperty }) => {
     const [state, setState] = useState(undefined);
     useEffect(() => fetchstate(setState, resourceUrl), [resourceUrl]);
-    console.log(2)
     return (<>
         {
             React.Children.map(children, child => {
