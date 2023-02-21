@@ -56,7 +56,7 @@ app.get('/current-user', (req, res) => {
 
 app.get('/users/:id', (req, res) => {
 	const { id } = req.params;
-	const user = users.find(user => user.id === id);
+	const user = users.find(user => user.id == id);
 	if (!user)
 		res.sendStatus(404);
 	else res.json(user);
@@ -66,9 +66,9 @@ app.post('/users/:id', (req, res) => {
 	const { id } = req.params;
 	const { user: updatedUser } = req.body;
 
-	users = users.map(user => user.id === id ? updatedUser : user);
+	users = users.map(user => user.id == id ? updatedUser : user);
 
-	res.json(users.find(user => user.id === id));
+	res.json(users.find(user => user.id == id));
 });
 
 app.get('/users', (req, res) => {
@@ -78,7 +78,7 @@ app.get('/users', (req, res) => {
 app.get('/products/:id', (req, res) => {
 	const { id } = req.params;
 
-	res.json(products.find(product => product.id === id));
+	res.json(products.find(product => product.id == id));
 });
 
 app.get('/products', (req, res) => {

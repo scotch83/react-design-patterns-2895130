@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
 
-export const GenericLoader = ({ children, resourceUrl, resourceProperty }) => {
+export const DataSource = ({ children, getData = () => { }, resourceProperty }) => {
     const [state, setState] = useState(undefined);
-    useEffect(() => fetchstate(setState, resourceUrl), [resourceUrl]);
-    console.log(2)
+    useEffect(() => fetchstate(getData, setState), [getData]);
     return (<>
         {
             React.Children.map(children, child => {
@@ -15,11 +14,11 @@ export const GenericLoader = ({ children, resourceUrl, resourceProperty }) => {
         }
     </>)
 }
-function fetchstate(setState, url) {
+
+function fetchstate(getData, setState) {
     return (async () => {
-        const response = await fetch(url);
-        if (response.ok) {
-            const currentstate = await response.json();
+        const currentstate = await getData();
+        if (currentstate) {
             setState(currentstate);
         }
     })();
