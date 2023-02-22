@@ -1,6 +1,10 @@
+import { UserInfo } from './UserInfo'
+import { withUser } from "./withUser";
+const UserInfoWrapper = withUser(UserInfo, '123')
+
 function App() {
 	return (
-		<h1>Your code goes here</h1>
+		<UserInfoWrapper a={1} />
 	);
 }
 
