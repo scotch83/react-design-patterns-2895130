@@ -1,18 +1,16 @@
-import { useEffect, useState } from "react"
-
+import React, { useState, useEffect } from 'react';
 
 export const withUser = (Component, userId) => {
-    return props => {
-        const [user, setUser] = useState(null);
+	return props => {
+		const [user, setUser] = useState(null);
 
-        useEffect(() =>
-        (async () => {
-            const response = await fetch(`/users/${userId}`)
-            const data = await response.json();
-            console.log(data);
-            setUser(data)
-        }))
+		useEffect(() => {
+			(async () => {
+				const response = await (await fetch(`/users/${userId}`)).json();
+				setUser(response.data);
+			})();
+		});
 
-        return <Component {...props} user={user} />
-    }
+		return <Component {...props} user={user} />
+	}
 }
