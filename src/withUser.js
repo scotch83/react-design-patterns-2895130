@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 
 export const withUser = (Component, userId) => {
 	return props => {
@@ -7,7 +6,7 @@ export const withUser = (Component, userId) => {
 
 		useEffect(() => {
 			(async () => {
-				const response = await axios.get(`/users/${userId}`);
+				const response = await (await fetch(`/users/${userId}`)).json();
 				setUser(response.data);
 			})();
 		});
