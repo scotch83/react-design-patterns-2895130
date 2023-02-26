@@ -1,6 +1,13 @@
+import { ProductInfo } from "./ProductInfo";
+import { UserInfo } from "./UserInfo";
+
 function App() {
 	return (
-		<h1>Your code goes here</h1>
+		<>
+			<UserInfo userId="234" />
+			<UserInfo userId="123" />
+			<ProductInfo productId="1234" />
+		</>
 	);
 }
 
